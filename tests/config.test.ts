@@ -32,7 +32,7 @@ afterEach(async () => {
 });
 
 describe("DEFAULT_CONFIG", () => {
-  it("starts disabled with exact OpenAI and OpenAI-Codex GPT-5.4/GPT-5.5/GPT-5.6/GPT-6-Astra targets", () => {
+  it("starts disabled with exact supported provider/model targets", () => {
     expect(DEFAULT_CONFIG).toEqual({
       enabled: false,
       targets: [
@@ -64,6 +64,11 @@ describe("DEFAULT_CONFIG", () => {
         {
           provider: "openai-codex",
           model: "gpt-6-astra",
+          serviceTier: "priority",
+        },
+        {
+          provider: "openai-codex",
+          model: "gpt-6.1-sol",
           serviceTier: "priority",
         },
       ],

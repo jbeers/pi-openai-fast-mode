@@ -71,6 +71,11 @@ export const DEFAULT_CONFIG: FastModeConfig = {
       model: "gpt-6-astra",
       serviceTier: DEFAULT_SERVICE_TIER,
     },
+    {
+      provider: "openai-codex",
+      model: "gpt-6.1-sol",
+      serviceTier: DEFAULT_SERVICE_TIER,
+    },
   ],
 };
 

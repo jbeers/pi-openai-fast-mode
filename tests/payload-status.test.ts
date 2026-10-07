@@ -73,15 +73,18 @@ describe("model matching", () => {
   });
 });
 
-describe.each(["openai", "openai-codex"])("GPT-6-Astra on %s", (provider) => {
-  const model = { provider, id: "gpt-6-astra" };
+describe.each([
+  { provider: "openai", id: "gpt-6-astra" },
+  { provider: "openai-codex", id: "gpt-6-astra" },
+  { provider: "openai-codex", id: "gpt-6.1-sol" },
+])("$id on $provider", (model) => {
   const defaults = cloneConfig();
   const enabledConfig = { ...defaults, enabled: true };
 
   it("matches the default target, injects priority, and shows fast when enabled", () => {
     expect(findMatchingTarget(model, defaults.targets)).toEqual({
-      provider,
-      model: "gpt-6-astra",
+      provider: model.provider,
+      model: model.id,
       serviceTier: "priority",
     });
     const payload = { model: model.id, messages: [], service_tier: "auto" };
@@ -99,7 +102,7 @@ describe.each(["openai", "openai-codex"])("GPT-6-Astra on %s", (provider) => {
   });
 
   it("does not match unconfigured model variants", () => {
-    const variant = { provider, id: "gpt-6-astra-preview" };
+    const variant = { ...model, id: `${model.id}-preview` };
     expect(findMatchingTarget(variant, defaults.targets)).toBeUndefined();
     expect(getFastModePayload(enabledConfig, variant, {})).toBeUndefined();
     expect(getStatusText(enabledConfig, variant)).toBeUndefined();
