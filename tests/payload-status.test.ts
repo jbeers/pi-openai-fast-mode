@@ -73,11 +73,21 @@ describe("model matching", () => {
   });
 });
 
-describe.each([
-  { provider: "openai", id: "gpt-6-astra" },
-  { provider: "openai-codex", id: "gpt-6-astra" },
-  { provider: "openai-codex", id: "gpt-6.1-sol" },
-])("$id on $provider", (model) => {
+describe.each(
+  ["openai", "openai-codex"].flatMap((provider) =>
+    [
+      "gpt-5.4",
+      "gpt-5.5",
+      "gpt-5.6",
+      "gpt-5.6-sol",
+      "gpt-5.6-terra",
+      "gpt-5.6-luna",
+      "gpt-6-astra",
+      "gpt-6.1-sol",
+      "gpt-6-luna",
+    ].map((id) => ({ provider, id })),
+  ),
+)("$id on $provider", (model) => {
   const defaults = cloneConfig();
   const enabledConfig = { ...defaults, enabled: true };
 

@@ -43,6 +43,8 @@ describe("DEFAULT_CONFIG", () => {
         { provider: "openai", model: "gpt-5.6-terra", serviceTier: "priority" },
         { provider: "openai", model: "gpt-5.6-luna", serviceTier: "priority" },
         { provider: "openai", model: "gpt-6-astra", serviceTier: "priority" },
+        { provider: "openai", model: "gpt-6.1-sol", serviceTier: "priority" },
+        { provider: "openai", model: "gpt-6-luna", serviceTier: "priority" },
         { provider: "openai-codex", model: "gpt-5.4", serviceTier: "priority" },
         { provider: "openai-codex", model: "gpt-5.5", serviceTier: "priority" },
         { provider: "openai-codex", model: "gpt-5.6", serviceTier: "priority" },
@@ -69,6 +71,11 @@ describe("DEFAULT_CONFIG", () => {
         {
           provider: "openai-codex",
           model: "gpt-6.1-sol",
+          serviceTier: "priority",
+        },
+        {
+          provider: "openai-codex",
+          model: "gpt-6-luna",
           serviceTier: "priority",
         },
       ],
