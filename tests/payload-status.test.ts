@@ -85,6 +85,8 @@ describe.each(
       "gpt-6-astra",
       "gpt-6.1-sol",
       "gpt-6-luna",
+      "gpt-6.2-astra",
+      "gpt-6.2-sol",
     ].map((id) => ({ provider, id })),
   ),
 )("$id on $provider", (model) => {

@@ -1,6 +1,6 @@
 # pi-openai-fast-mode
 
-Pi package that adds a Fast Mode toggle for GPT-6-Luna, GPT-6.1-Sol, GPT-6-Astra, GPT-5.6, GPT-5.5, and GPT-5.4 on both OpenAI and OpenAI-Codex.
+Pi package that adds a Fast Mode toggle for GPT-6.2-Astra, GPT-6.2-Sol, GPT-6-Luna, GPT-6.1-Sol, GPT-6-Astra, GPT-5.6, GPT-5.5, and GPT-5.4 on both OpenAI and OpenAI-Codex.
 
 <img style="width: 100%; height: auto;" alt="fast mode" src="https://raw.githubusercontent.com/johncmunson/pi-openai-fast-mode/refs/heads/main/preview-img.png" />
 
@@ -43,6 +43,18 @@ Start Pi with Fast Mode enabled and persisted:
 pi --fast
 ```
 
+## Check a request
+
+The `fast` badge means the toggle is on and the selected model matches. It is not a receipt from OpenAI. To check a request from this checkout with Pi 0.99 or newer, load the tier diagnostic **after** the plugin:
+
+```bash
+pi -ne -e ./src/index.ts -e ./examples/check-tier.mjs --model openai/gpt-6.2-astra
+```
+
+Run `/fast on` and send one short prompt. `request service_tier = priority` means the diagnostic saw the Fast tier in Pi's request payload. `response service_tier = priority` means the provider also reported priority for that response. If the response reports `default`, or no tier is reported, do not infer priority from the badge. Run `/fast off` and send another prompt to compare. These are real model requests; the diagnostic displays only the model and tier, not prompts or credentials.
+
+ChatGPT Profile's **Fast Mode · % of runs** is an aggregate, not a per-request trace. Its label does not say which clients count as runs. With a platform API key, check usage for the OpenAI API project instead of the ChatGPT profile.
+
 ## Default configuration
 
 Fast Mode starts disabled and only applies to exact configured provider/model pairs. Every supported model is listed for both `openai` and `openai-codex`:
@@ -60,6 +72,8 @@ Fast Mode starts disabled and only applies to exact configured provider/model pa
     { "provider": "openai", "model": "gpt-6-astra", "serviceTier": "priority" },
     { "provider": "openai", "model": "gpt-6.1-sol", "serviceTier": "priority" },
     { "provider": "openai", "model": "gpt-6-luna", "serviceTier": "priority" },
+    { "provider": "openai", "model": "gpt-6.2-astra", "serviceTier": "priority" },
+    { "provider": "openai", "model": "gpt-6.2-sol", "serviceTier": "priority" },
     {
       "provider": "openai-codex",
       "model": "gpt-5.4",
@@ -104,7 +118,9 @@ Fast Mode starts disabled and only applies to exact configured provider/model pa
       "provider": "openai-codex",
       "model": "gpt-6-luna",
       "serviceTier": "priority"
-    }
+    },
+    { "provider": "openai-codex", "model": "gpt-6.2-astra", "serviceTier": "priority" },
+    { "provider": "openai-codex", "model": "gpt-6.2-sol", "serviceTier": "priority" }
   ]
 }
 ```

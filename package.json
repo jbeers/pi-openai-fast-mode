@@ -16,6 +16,7 @@
   },
   "files": [
     "src",
+    "examples/check-tier.mjs",
     "README.md"
   ],
   "pi": {
